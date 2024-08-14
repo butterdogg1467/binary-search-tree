@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function(){
     class Tree {
         constructor(arr){
             this.root = this.buildTree(arr)
+            this.prettyPrint(this.root)
         }
 
         buildTree(arr) {
@@ -44,17 +45,30 @@ document.addEventListener('DOMContentLoaded', function(){
 
                 rootNode.left = this.buildTree(leftHalf)
                 rootNode.right = this.buildTree(rightHalf)
+                
 
                 return rootNode
             }
         }
+
+        prettyPrint = (node, prefix = "", isLeft = true) => {
+            if (node === null) {
+              return;
+            }
+            if (node.right !== null) {
+              this.prettyPrint(node.right, `${prefix}${isLeft ? "│   " : "    "}`, false);
+            }
+            console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.data}`);
+            if (node.left !== null) {
+              this.prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
+            }
+          };
     }
 
     let test = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
 
 
-
-    
+   
 
 
 
