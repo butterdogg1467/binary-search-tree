@@ -63,9 +63,42 @@ document.addEventListener('DOMContentLoaded', function(){
               this.prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
             }
           };
+
+        insert (value) {
+            let curr = this.root
+
+            if (this.root === null) {
+                this.root = new Node(value)
+                return this.root
+            }
+
+            while (true) {
+                if (value > curr.data) {
+                    if (curr.right !== null) {
+                        curr = curr.right
+                    } else {
+                        curr.right = new Node(value)
+                        this.prettyPrint(this.root)
+                        return curr.right
+                    }
+                } else if (value < curr.data){
+                    if (curr.left !== null) {
+                            curr = curr.left
+                    } else {
+                        curr.left = new Node(value)
+                        this.prettyPrint(this.root)
+                        return curr.left
+                    }
+                }
+            }
+        }
+
     }
 
-    let test = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
+    let test = new Tree([1, 7, 4])
+
+    test.insert(10)
+
 
 
    
