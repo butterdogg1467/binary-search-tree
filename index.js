@@ -93,11 +93,45 @@ document.addEventListener('DOMContentLoaded', function(){
             }
         }
 
+        remove (value) {
+            if (this.root === null) {
+                return root
+            }
+            
+            let curr = this.root
+            let parent = null
+            while (curr !== null && curr.data !== value) {
+                if (value > curr.data) {
+                    parent = curr
+                    curr = curr.right
+                    if (curr.data === value && curr.left === null && curr.right === null) {
+                        parent.right = null
+                        this.prettyPrint(this.root)
+                        return
+                    }
+                    console.log(curr.data)
+                } else if (value < curr.data) {
+                    parent = curr
+                    curr = curr.left
+                    if (curr.data === value && curr.left === null && curr.right === null) {
+                        parent.left = null
+                        this.prettyPrint(this.root)
+                        return
+                    }
+                    console.log(curr.data)
+                }
+
+            }
+            
+        }
+
     }
 
-    let test = new Tree([1, 7, 4])
+    let test = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
 
     test.insert(10)
+
+    test.remove(9)
 
 
 
