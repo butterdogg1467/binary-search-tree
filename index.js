@@ -108,6 +108,16 @@ document.addEventListener('DOMContentLoaded', function(){
                         parent.right = null
                         this.prettyPrint(this.root)
                         return
+                    } else if (curr.data === value && curr.left !== null) {
+                        parent.left = curr.left
+                        curr.left = null
+                        this.prettyPrint(this.root)
+                        return
+                    } else if (curr.data === value && curr.right !== null) {
+                        parent.right = curr.right
+                        curr.right = null
+                        this.prettyPrint(this.root)
+                        return
                     }
                     console.log(curr.data)
                 } else if (value < curr.data) {
@@ -117,8 +127,17 @@ document.addEventListener('DOMContentLoaded', function(){
                         parent.left = null
                         this.prettyPrint(this.root)
                         return
+                    } else if (curr.data === value && curr.left !== null) {
+                        parent.left = curr.left
+                        curr.left = null
+                        this.prettyPrint(this.root)
+                        return
+                    } else if (curr.data === value && curr.right !== null) {
+                        parent.right = curr.right
+                        curr.right = null
+                        this.prettyPrint(this.root)
+                        return
                     }
-                    console.log(curr.data)
                 }
 
             }
@@ -129,10 +148,9 @@ document.addEventListener('DOMContentLoaded', function(){
 
     let test = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
 
-    test.insert(10)
+    // test.insert(10)
 
-    test.remove(9)
-
+    // test.remove(3)
 
 
    
