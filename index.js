@@ -108,19 +108,35 @@ document.addEventListener('DOMContentLoaded', function(){
                         parent.right = null
                         this.prettyPrint(this.root)
                         return
-                    } else if (curr.data === value && curr.left !== null || curr.data === value && curr.right !== null) {
-                        if (curr.data === value && curr.left !== null) {
+
+                    } else if (curr.data === value && curr.left !== null && curr.right === null) {
+
+                        if (curr === parent.left) {
                             parent.left = curr.left
                             curr.left = null
                             this.prettyPrint(this.root)
                             return
-                        } else if (curr.data === value && curr.right !== null) {
+                        } else if (curr === parent.right) {
+                            parent.right = curr.left
+                            curr.left = null
+                            this.prettyPrint(this.root)
+                            return
+                        }
+
+                    } else if (curr.data === value && curr.right !== null && curr.left === null) {
+                        if (curr === parent.left) {
+                            parent.left = curr.right
+                            curr.right = null
+                            this.prettyPrint(this.root)
+                            return
+                        } else if (curr === parent.right) {
                             parent.right = curr.right
                             curr.right = null
                             this.prettyPrint(this.root)
                             return
-                        } 
-                    } else if (curr.data === value && curr.left !== null && curr.right !== null) {
+                        }
+
+                    } else if (curr.data ===  value && curr.left !== null && curr.right !== null) {
                         console.log(curr.data)
                         this.prettyPrint(this.root)
                         return
@@ -132,18 +148,34 @@ document.addEventListener('DOMContentLoaded', function(){
                         parent.left = null
                         this.prettyPrint(this.root)
                         return
-                    } else if (curr.data === value && curr.left !== null || curr.data === value && curr.right !== null) {
-                        if (curr.data === value && curr.left !== null) {
+
+                    } else if (curr.data === value && curr.left !== null && curr.right === null) {
+
+                        if (curr === parent.left) {
                             parent.left = curr.left
                             curr.left = null
                             this.prettyPrint(this.root)
                             return
-                        } else if (curr.data === value && curr.right !== null) {
+                        } else if (curr === parent.right) {
+                            parent.right = curr.left
+                            curr.left = null
+                            this.prettyPrint(this.root)
+                            return
+                        }
+
+                    } else if (curr.data === value && curr.right !== null && curr.left === null) {
+                        if (curr === parent.left) {
+                            parent.left = curr.right
+                            curr.right = null
+                            this.prettyPrint(this.root)
+                            return
+                        } else if (curr === parent.right) {
                             parent.right = curr.right
                             curr.right = null
                             this.prettyPrint(this.root)
                             return
-                        } 
+                        }
+
                     } else if (curr.data === value && curr.left !== null && curr.right !== null) {
                         console.log(curr.data)
                         this.prettyPrint(this.root)
@@ -161,7 +193,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
     // test.insert(10)
 
-    test.remove(8)
+    // test.remove(3)
 
    
 
