@@ -137,7 +137,17 @@ document.addEventListener('DOMContentLoaded', function(){
                         }
 
                     } else if (curr.data ===  value && curr.left !== null && curr.right !== null) {
-                        console.log(curr.data)
+                        let nodeToBeRemoved = value
+                        while (curr.right !== null) {
+                            parent = curr
+                            curr = curr.right
+                            if (curr.right === null){
+                                console.log(curr)
+                                nodeToBeRemoved = curr
+                                this.prettyPrint(this.root)
+                                console.log(nodeToBeRemoved)
+                            }
+                        }
                         this.prettyPrint(this.root)
                         return
                     }
@@ -177,7 +187,17 @@ document.addEventListener('DOMContentLoaded', function(){
                         }
 
                     } else if (curr.data === value && curr.left !== null && curr.right !== null) {
-                        console.log(curr.data)
+                        let nodeToBeRemoved = value
+                        curr = curr.right
+                        while (curr.left !== null) {
+                            parent = curr
+                            curr = curr.left
+                            if (curr.right === null){
+                                console.log(curr.data)
+                                console.log(typeof(value))
+                                value = curr.data
+                            }
+                        }
                         this.prettyPrint(this.root)
                         return
                     }
@@ -193,7 +213,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
     // test.insert(10)
 
-    // test.remove(3)
+    test.remove(4)
 
    
 
