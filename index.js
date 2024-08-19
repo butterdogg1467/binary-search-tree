@@ -95,10 +95,34 @@ document.addEventListener('DOMContentLoaded', function(){
 
         remove (value) {
             if (this.root === null) {
-                return root
+                return this.root
             }
             
             let curr = this.root
+
+            if (value === this.root.data) {
+                if (this.root.right !== null && this.root.left === null) {
+                    this.root = this.root.right
+                    this.prettyPrint(this.root)
+                    return
+                } else if (this.root.right === null && this.root.left !== null) {
+                    this.root = this.root.left
+                    this.prettyPrint(this.root)
+                    return
+                } else if (this.root.right !== null && this.root.left !== null){
+                    let nodeToBeRemoved = this.root
+                    curr = this.root.right
+                        while (curr.left !== null) {
+                            curr = curr.left
+                            if (curr.right === null){
+                                nodeToBeRemoved.data = curr.data
+                            }
+                        }
+                        this.prettyPrint(this.root)
+                        return
+                }
+            }
+
             let parent = null
             while (curr !== null && curr.data !== value) {
                 if (value > curr.data) {
@@ -136,22 +160,32 @@ document.addEventListener('DOMContentLoaded', function(){
                             return
                         }
 
-                    } else if (curr.data ===  value && curr.left !== null && curr.right !== null) {
-                        let nodeToBeRemoved = value
-                        while (curr.right !== null) {
+                    } else if (curr.data === value && curr.left !== null && curr.right !== null && value !== this.root) {
+                        let nodeToBeRemoved = curr
+                        curr = curr.right
+                        while (curr.left !== null) {
                             parent = curr
-                            curr = curr.right
+                            curr = curr.left
                             if (curr.right === null){
-                                console.log(curr)
-                                nodeToBeRemoved = curr
-                                this.prettyPrint(this.root)
-                                console.log(nodeToBeRemoved)
+                                console.log({parent})
+                                nodeToBeRemoved.data = curr.data
+
+                                if (parent.left === curr){
+                                    parent.left = curr.right
+                                } else if (parent.right === curr) {
+                                    parent.right = curr.right
+                                }
                             }
                         }
                         this.prettyPrint(this.root)
                         return
-                    }
+
+                    } 
+
+
                 } else if (value < curr.data) {
+
+                    
                     parent = curr
                     curr = curr.left
                     if (curr.data === value && curr.left === null && curr.right === null) {
@@ -186,21 +220,27 @@ document.addEventListener('DOMContentLoaded', function(){
                             return
                         }
 
-                    } else if (curr.data === value && curr.left !== null && curr.right !== null) {
-                        let nodeToBeRemoved = value
+                    } else if (curr.data === value && curr.left !== null && curr.right !== null && value !== this.root) {
+                        let nodeToBeRemoved = curr
                         curr = curr.right
                         while (curr.left !== null) {
                             parent = curr
                             curr = curr.left
                             if (curr.right === null){
-                                console.log(curr.data)
-                                console.log(typeof(value))
-                                value = curr.data
+                                console.log({parent})
+                                nodeToBeRemoved.data = curr.data
+
+                                if (parent.left === curr){
+                                    parent.left = curr.right
+                                } else if (parent.right === curr) {
+                                    parent.right = curr.right
+                                }
                             }
                         }
                         this.prettyPrint(this.root)
                         return
-                    }
+
+                    } 
                 }
 
             }
@@ -209,14 +249,23 @@ document.addEventListener('DOMContentLoaded', function(){
 
     }
 
-    let test = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
+    let test = new Tree([8, 67, 4])
 
     // test.insert(10)
 
-    test.remove(4)
+    test.remove(8)
 
    
-
+    // function isBalanced(){
+    //     let leftSub = []
+    //     let rightSub = []
+    //     traverse tree and push each node into 
+    //     array depending on where it is
+    //     after all nodes have been pushed
+    //     check diffrence between both arrays
+    //     if it is 1, the tree is isBalanced
+    //     otherwise, return false
+    // }
 
 
 
