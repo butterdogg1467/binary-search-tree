@@ -268,6 +268,42 @@ document.addEventListener('DOMContentLoaded', function(){
             
         }
 
+        find (value) {
+            let curr = this.root
+
+            if (this.root === null){
+                console.log('Root is null')
+                return 
+            }
+            
+            if (value === this.root.data) {
+                console.log(this.root)
+                return
+            } else if (value !== this.root.data) {
+                while (value !== curr.data) {
+                    if (value > curr.data) {
+                        if (curr.right !== null) {
+                            curr = curr.right
+                        } 
+                    } else if (value < curr.data) {
+                        if (curr.left !== null) {
+                            curr = curr.left
+                        } 
+                    }
+
+                   if (curr.data === value && curr !== null){
+                        console.log(curr)
+                        return curr
+                    }
+
+                    if (curr.left === null && curr.right === null && curr !== value) {
+                        console.log('Value not found')
+                        return
+                    }
+                }
+            }       
+        }
+
     }
 
     let test = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
@@ -278,6 +314,8 @@ document.addEventListener('DOMContentLoaded', function(){
     // test.remove(4)
     // test.remove(3)
     // test.remove(1)
+
+    test.find(67)
 
    
     // function isBalanced(){
