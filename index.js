@@ -304,6 +304,31 @@ document.addEventListener('DOMContentLoaded', function(){
             }       
         }
 
+        levelOrder(callback) {
+            let curr = this.root
+            let queue = []
+            let results = []
+
+            queue.push(curr)
+            while (queue.length !== 0) {
+                let subarray = []
+                for (let i = 0; i < queue.length; i++) {
+                    curr = queue.shift()
+                    subarray.push(curr.data)
+                    if (curr.left !== null && curr.right === null){
+                        queue.push(curr.left)
+                    } if (curr.right !== null && curr.left === null){
+                        queue.push(curr.right)
+                    } if (curr.right !== null && curr.left !== null){
+                        queue.push(curr.left)
+                        queue.push(curr.right)
+                    } 
+                }
+                results.push(subarray)
+            }
+            console.log({results})
+        }
+
     }
 
     let test = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
@@ -315,7 +340,9 @@ document.addEventListener('DOMContentLoaded', function(){
     // test.remove(3)
     // test.remove(1)
 
-    test.find(67)
+    // test.find(67)
+
+    test.levelOrder(console.log)
 
    
     // function isBalanced(){
