@@ -305,28 +305,31 @@ document.addEventListener('DOMContentLoaded', function(){
         }
 
         levelOrder(callback) {
+            if (!callback){
+                throw new Error('Callback is required!')
+            }
             let curr = this.root
             let queue = []
             let results = []
 
             queue.push(curr)
-            while (queue.length !== 0) {
+            while (queue.length > 0) {
                 let subarray = []
-                for (let i = 0; i < queue.length; i++) {
+                let length = queue.length
+                for (let i = 0; i < length; i++) {
                     curr = queue.shift()
+                    callback(curr)
                     subarray.push(curr.data)
-                    if (curr.left !== null && curr.right === null){
+                    if (curr.left){
                         queue.push(curr.left)
-                    } if (curr.right !== null && curr.left === null){
+                    } if (curr.right){
                         queue.push(curr.right)
-                    } if (curr.right !== null && curr.left !== null){
-                        queue.push(curr.left)
-                        queue.push(curr.right)
-                    } 
+                    }   
                 }
                 results.push(subarray)
             }
             console.log({results})
+            return results
         }
 
     }
@@ -342,7 +345,9 @@ document.addEventListener('DOMContentLoaded', function(){
 
     // test.find(67)
 
-    test.levelOrder(console.log)
+    // test.levelOrder(console.log)
+
+    
 
    
     // function isBalanced(){
