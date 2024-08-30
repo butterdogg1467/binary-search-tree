@@ -332,6 +332,31 @@ document.addEventListener('DOMContentLoaded', function(){
             return results
         }
 
+        inOrder(callback) {
+            if (this.root === null){
+                return
+            }
+
+            let stack = []
+            let curr = this.root
+            while (curr !== null || stack.length > 0) {
+                while (curr !== null){
+                    stack.push(curr)
+                    curr = curr.left
+                }
+                let popped = stack.pop()
+                callback(popped)
+                if (popped.right !== null){
+                    curr = popped.right
+                }
+            }
+        }
+
+    }
+
+    function calledBack(value){
+        console.log(value.data + ' is the value')
+        return
     }
 
     let test = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
@@ -346,6 +371,8 @@ document.addEventListener('DOMContentLoaded', function(){
     // test.find(67)
 
     // test.levelOrder(console.log)
+
+    // test.inOrder(calledBack)
 
     
 
