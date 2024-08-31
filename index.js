@@ -352,6 +352,29 @@ document.addEventListener('DOMContentLoaded', function(){
             }
         }
 
+        preOrder(callback) {
+            if (this.root === null) {
+                return
+            }
+
+            let stack = []
+            let curr = this.root
+            stack.push(curr)
+
+            while (stack.length > 0) {
+                let popped = stack.pop()
+                callback(popped)
+                if (popped.left && popped.right) {
+                    stack.push(popped.right)
+                    stack.push(popped.left)
+                } else if (popped.right) {
+                    stack.push(popped.right)
+                } else if (popped.left) {
+                    stack.push(popped.left)
+                } 
+            }
+        }
+
     }
 
     function calledBack(value){
@@ -373,6 +396,8 @@ document.addEventListener('DOMContentLoaded', function(){
     // test.levelOrder(console.log)
 
     // test.inOrder(calledBack)
+
+    // test.preOrder(calledBack)
 
     
 
