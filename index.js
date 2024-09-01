@@ -375,6 +375,35 @@ document.addEventListener('DOMContentLoaded', function(){
             }
         }
 
+        postOrder(callback) {
+            if (this.root === null) {
+                return
+            }
+
+            let stack = []
+            let outputStack = []
+            let curr = this.root
+            stack.push(curr)
+            
+            while (stack.length > 0) {
+                let popped = stack.pop()
+                outputStack.push(popped)
+                if (popped.left && popped.right) {
+                    stack.push(popped.left)
+                    stack.push(popped.right)
+                } else if (popped.left) {
+                    stack.push(popped.left)
+                } else if (popped.right) {
+                    stack.push(popped.right)
+                } 
+            }
+
+            while (outputStack.length > 0) {
+                let poppedOutput = outputStack.pop()
+                callback(poppedOutput)
+            }
+        }
+
     }
 
     function calledBack(value){
@@ -397,11 +426,10 @@ document.addEventListener('DOMContentLoaded', function(){
 
     // test.inOrder(calledBack)
 
-    // test.preOrder(calledBack)
+    // test.preOrder(calledBack)   
 
-    
+    // test.postOrder(calledBack)
 
-   
     // function isBalanced(){
     //     let leftSub = []
     //     let rightSub = []
