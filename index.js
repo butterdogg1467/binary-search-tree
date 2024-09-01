@@ -333,6 +333,9 @@ document.addEventListener('DOMContentLoaded', function(){
         }
 
         inOrder(callback) {
+            if (!callback){
+                throw new Error('Callback is required!')
+            }
             if (this.root === null){
                 return
             }
@@ -353,6 +356,9 @@ document.addEventListener('DOMContentLoaded', function(){
         }
 
         preOrder(callback) {
+            if (!callback){
+                throw new Error('Callback is required!')
+            }
             if (this.root === null) {
                 return
             }
@@ -376,6 +382,9 @@ document.addEventListener('DOMContentLoaded', function(){
         }
 
         postOrder(callback) {
+            if (!callback){
+                throw new Error('Callback is required!')
+            }
             if (this.root === null) {
                 return
             }
@@ -402,6 +411,10 @@ document.addEventListener('DOMContentLoaded', function(){
                 let poppedOutput = outputStack.pop()
                 callback(poppedOutput)
             }
+        }
+
+        height(node){
+            
         }
 
     }
