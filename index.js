@@ -301,7 +301,7 @@ document.addEventListener('DOMContentLoaded', function(){
                         return
                     }
                 }
-            }       
+            }     
         }
 
         levelOrder(callback) {
@@ -414,8 +414,34 @@ document.addEventListener('DOMContentLoaded', function(){
         }
 
         height(node){
+            if (!node){
+                throw new Error('Node is required!')
+            }
+
+            if (this.root === null) {
+                return
+            }
+
+            let curr = this.root
+            let height = 0
             
+            while (curr.data !== node) {
+                if (node > curr.data) {
+                    curr = curr.right
+                    console.log(curr.data)
+                } else if (node < curr.data) {
+                    curr = curr.left
+                    console.log(curr.data)
+                }
+            }
+
+
+
         }
+
+
+
+
 
     }
 
@@ -442,6 +468,8 @@ document.addEventListener('DOMContentLoaded', function(){
     // test.preOrder(calledBack)   
 
     // test.postOrder(calledBack)
+
+    test.height(4)
 
     // function isBalanced(){
     //     let leftSub = []
