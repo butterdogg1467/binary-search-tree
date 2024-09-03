@@ -413,6 +413,7 @@ document.addEventListener('DOMContentLoaded', function(){
             }
         }
 
+
         height(node){
             if (!node){
                 throw new Error('Node is required!')
@@ -423,26 +424,47 @@ document.addEventListener('DOMContentLoaded', function(){
             }
 
             let curr = this.root
-            let height = 0
+            let height
+            let nodeFound
+
             
             while (curr.data !== node) {
                 if (node > curr.data) {
                     curr = curr.right
-                    console.log(curr.data)
                 } else if (node < curr.data) {
                     curr = curr.left
-                    console.log(curr.data)
                 }
             }
 
+            if (curr.data === node) {
+                nodeFound = curr
+                console.log(nodeFound)
+            }
 
+            height = findHeight(nodeFound)
+            console.log({height})
+
+            return height
 
         }
 
 
 
 
+    }
 
+    function findHeight(curr) {
+        if (curr === null) {
+            return 0
+        }
+
+        let leftHeight = findHeight(curr.left)
+        let rightHeight = findHeight(curr.right)
+
+        let maxHeight = Math.max(leftHeight, rightHeight)
+        let currentNodeHeight = maxHeight + 1
+
+        return currentNodeHeight
     }
 
     function calledBack(value){
@@ -469,7 +491,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
     // test.postOrder(calledBack)
 
-    test.height(4)
+    test.height(3)
 
     // function isBalanced(){
     //     let leftSub = []
