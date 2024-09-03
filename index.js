@@ -448,6 +448,39 @@ document.addEventListener('DOMContentLoaded', function(){
 
         }
 
+        depth(node) {
+            if (!node){
+                throw new Error('Node is required!')
+            }
+
+            if (this.root === null) {
+                return
+            }
+
+            let curr = this.root
+            let depth = 0
+            let nodeFound
+
+            
+            while (curr.data !== node) {
+                if (node > curr.data) {
+                    curr = curr.right
+                    depth += 1
+                } else if (node < curr.data) {
+                    curr = curr.left
+                    depth += 1
+                }
+            }
+
+            if (curr.data === node) {
+                nodeFound = curr
+                console.log(nodeFound)
+            }
+
+            console.log({depth})
+            return depth
+        }
+
 
 
 
@@ -455,7 +488,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
     function findHeight(curr) {
         if (curr === null) {
-            return 0
+            return -1
         }
 
         let leftHeight = findHeight(curr.left)
@@ -491,7 +524,9 @@ document.addEventListener('DOMContentLoaded', function(){
 
     // test.postOrder(calledBack)
 
-    test.height(3)
+    // test.height(3)
+    
+    test.depth(3)
 
     // function isBalanced(){
     //     let leftSub = []
