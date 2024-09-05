@@ -486,28 +486,53 @@ document.addEventListener('DOMContentLoaded', function(){
                 return
             }
 
-            let curr = this.root
+            let curr = this.root.left
             let countRight = 0
             let countLeft = 0
+            let stack = []
+            let poppedArrRight = []
+            let poppedArrLeft = []
+            stack.push(curr.left)
 
+            while (curr !== null || stack.length > 0) {
+                while (curr !== null){
+                    stack.push(curr)
+                    curr = curr.left
+                }
+                let popped = stack.pop()
+                poppedArrLeft.push(popped)
+                if (popped.right !== null){
+                    curr = popped.right
+                }
+            }
+            
+            let setPoppedLeft = new Set(poppedArrLeft)
+            let setPoppedArrLeft = Array.from(setPoppedLeft)
 
-            // while (curr.right !== null) {
-            //     if (curr.right !== null) {
-            //         curr = curr.right
-            //         countRight += 1
-            //         console.log({curr})
-            //     }
+            console.log({setPoppedArrLeft})
 
-            //     if (curr.left !== null) {
-            //         curr = curr.left
-            //         countLeft += 1
-            //         console.log({curr})
-            //     }
+            curr = this.root.right
+            stack.push(curr.right)
 
-            // }
-
+            while (curr !== null || stack.length > 0) {
+                while (curr !== null){
+                    stack.push(curr)
+                    curr = curr.left
+                }
+                let popped = stack.pop()
+                poppedArrRight.push(popped)
+                if (popped.right !== null){
+                    curr = popped.right
+                }
+            }
             
 
+            let setPoppedRight = new Set(poppedArrRight)
+            let setPoppedArrRight = Array.from(setPoppedRight)
+
+            console.log({setPoppedArrRight})
+
+            
 
             
 
