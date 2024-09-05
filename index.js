@@ -492,7 +492,10 @@ document.addEventListener('DOMContentLoaded', function(){
             let stack = []
             let poppedArrRight = []
             let poppedArrLeft = []
+            let queueRight = []
+            let queueLeft = []
             stack.push(curr.left)
+            queueLeft.push(curr.left)
 
             while (curr !== null || stack.length > 0) {
                 while (curr !== null){
@@ -501,6 +504,7 @@ document.addEventListener('DOMContentLoaded', function(){
                 }
                 let popped = stack.pop()
                 poppedArrLeft.push(popped)
+                queueLeft.push(popped)
                 if (popped.right !== null){
                     curr = popped.right
                 }
@@ -513,6 +517,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
             curr = this.root.right
             stack.push(curr.right)
+            queueRight.push(curr.right)
 
             while (curr !== null || stack.length > 0) {
                 while (curr !== null){
@@ -521,16 +526,19 @@ document.addEventListener('DOMContentLoaded', function(){
                 }
                 let popped = stack.pop()
                 poppedArrRight.push(popped)
+                queueRight.push(popped)
                 if (popped.right !== null){
                     curr = popped.right
                 }
             }
             
-
             let setPoppedRight = new Set(poppedArrRight)
             let setPoppedArrRight = Array.from(setPoppedRight)
 
             console.log({setPoppedArrRight})
+            console.log({queueRight})
+            console.log({queueLeft})
+            
 
             
 
