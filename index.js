@@ -481,7 +481,38 @@ document.addEventListener('DOMContentLoaded', function(){
             return depth
         }
 
+        isBalanced() {
+            if (this.root === null) {
+                return
+            }
 
+            let curr = this.root
+            let countRight = 0
+            let countLeft = 0
+
+
+            // while (curr.right !== null) {
+            //     if (curr.right !== null) {
+            //         curr = curr.right
+            //         countRight += 1
+            //         console.log({curr})
+            //     }
+
+            //     if (curr.left !== null) {
+            //         curr = curr.left
+            //         countLeft += 1
+            //         console.log({curr})
+            //     }
+
+            // }
+
+            
+
+
+            
+
+
+        }
 
 
     }
@@ -526,7 +557,9 @@ document.addEventListener('DOMContentLoaded', function(){
 
     // test.height(3)
     
-    test.depth(3)
+    // test.depth(3)
+
+    test.isBalanced()
 
     // function isBalanced(){
     //     let leftSub = []
