@@ -341,6 +341,7 @@ document.addEventListener('DOMContentLoaded', function(){
             }
 
             let stack = []
+            let results = []
             let curr = this.root
             while (curr !== null || stack.length > 0) {
                 while (curr !== null){
@@ -349,10 +350,12 @@ document.addEventListener('DOMContentLoaded', function(){
                 }
                 let popped = stack.pop()
                 callback(popped)
+                results.push(popped)
                 if (popped.right !== null){
                     curr = popped.right
                 }
             }
+            return results
         }
 
         preOrder(callback) {
@@ -490,6 +493,21 @@ document.addEventListener('DOMContentLoaded', function(){
 
         }
 
+        rebalance() {
+            if (this.root === null) {
+                return
+            }
+
+            let values = []
+
+            this.inOrder(node => {
+                values.push(node.data)
+            })
+
+            let newTree = new Tree(values)
+
+        }
+
 
     }
 
@@ -534,9 +552,18 @@ document.addEventListener('DOMContentLoaded', function(){
         return
     }
 
+    function nothing() {
+        return
+    }
+
+    function extractNodeData(node) {
+        return node.data;
+    }
+
     let test = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
 
     // test.insert(10)
+    test.insert(0)      
 
     // test.remove(8)
     // test.remove(4)
@@ -557,7 +584,9 @@ document.addEventListener('DOMContentLoaded', function(){
     
     // test.depth(3)
 
-    test.isBalanced()
+    // test.isBalanced()
+
+    test.rebalance()
 
     // function isBalanced(){
     //     let leftSub = []
