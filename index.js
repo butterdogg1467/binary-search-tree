@@ -486,67 +486,32 @@ document.addEventListener('DOMContentLoaded', function(){
                 return
             }
 
-            let curr = this.root.left
-            let countRight = 0
-            let countLeft = 0
-            let stack = []
-            let poppedArrRight = []
-            let poppedArrLeft = []
-            let queueRight = []
-            let queueLeft = []
-            stack.push(curr.left)
-            queueLeft.push(curr.left)
-
-            while (curr !== null || stack.length > 0) {
-                while (curr !== null){
-                    stack.push(curr)
-                    curr = curr.left
-                }
-                let popped = stack.pop()
-                poppedArrLeft.push(popped)
-                queueLeft.push(popped)
-                if (popped.right !== null){
-                    curr = popped.right
-                }
-            }
-            
-            let setPoppedLeft = new Set(poppedArrLeft)
-            let setPoppedArrLeft = Array.from(setPoppedLeft)
-
-            console.log({setPoppedArrLeft})
-
-            curr = this.root.right
-            stack.push(curr.right)
-            queueRight.push(curr.right)
-
-            while (curr !== null || stack.length > 0) {
-                while (curr !== null){
-                    stack.push(curr)
-                    curr = curr.left
-                }
-                let popped = stack.pop()
-                poppedArrRight.push(popped)
-                queueRight.push(popped)
-                if (popped.right !== null){
-                    curr = popped.right
-                }
-            }
-            
-            let setPoppedRight = new Set(poppedArrRight)
-            let setPoppedArrRight = Array.from(setPoppedRight)
-
-            console.log({setPoppedArrRight})
-            console.log({queueRight})
-            console.log({queueLeft})
-            
-
-            
-
-            
-
+            console.log(isBalancedCheck(this.root))
 
         }
 
+
+    }
+
+    function isBalancedCheck(node) {
+        if (node === null) {
+            return {isBalanced: true, height: -1}
+        }
+
+        let left = isBalancedCheck(node.left)
+        let right = isBalancedCheck(node.right)
+
+        if (!left.isBalanced || !right.isBalanced) {
+            return {isBalanced: false, height: -1}
+        }
+
+        if (Math.abs(left.height - right.height) > 1) {
+            return {isBalanced: false, height: -1}
+        }
+
+        let currentNodeHeight = 1 + Math.max(left.height, right.height)
+
+        return { isBalanced: 'true', height: currentNodeHeight }
 
     }
 
