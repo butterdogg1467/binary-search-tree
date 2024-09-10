@@ -506,6 +506,8 @@ document.addEventListener('DOMContentLoaded', function(){
 
             let newTree = new Tree(values)
 
+            this.root = newTree.root
+
         }
 
 
@@ -560,15 +562,11 @@ document.addEventListener('DOMContentLoaded', function(){
         return node.data;
     }
 
-    let test = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
+    // let test = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
 
     // test.insert(10)
-    test.insert(0)      
 
     // test.remove(8)
-    // test.remove(4)
-    // test.remove(3)
-    // test.remove(1)
 
     // test.find(67)
 
@@ -586,20 +584,72 @@ document.addEventListener('DOMContentLoaded', function(){
 
     // test.isBalanced()
 
-    test.rebalance()
+    // test.rebalance()
 
-    // function isBalanced(){
-    //     let leftSub = []
-    //     let rightSub = []
-    //     traverse tree and push each node into 
-    //     array depending on where it is
-    //     after all nodes have been pushed
-    //     check diffrence between both arrays
-    //     if it is 1, the tree is isBalanced
-    //     otherwise, return false
-    // }
+    // test.isBalanced()
 
 
+    
+    function driver(length = 100) {
+        let randomArray = []
+
+        for (let i = 0; randomArray.length < length; i++) {
+            let randomNum = Math.floor(Math.random() * length)
+            randomArray.push(randomNum)
+        }
+
+        let tree = new Tree(randomArray)
+
+        tree.isBalanced()
+
+        tree.levelOrder(calledBack)
+        console.log('----------------')
+
+        tree.preOrder(calledBack)
+        console.log('----------------')   
+
+        tree.postOrder(calledBack)
+        console.log('----------------')
+
+        tree.inOrder(calledBack)
+        console.log('----------------')
+
+        let results = []
+
+        tree.inOrder(node => {
+            results.push(node.data)
+        })
+
+        for (let i = 0; i < 10; i++) {
+            let randomNumAdded = Math.floor(Math.random() * 10)
+            if (!results.includes(randomNumAdded)) {
+                tree.insert(randomNumAdded)
+                results.push(randomNumAdded)
+            }
+        }
+
+        tree.isBalanced()
+
+        tree.rebalance()
+
+        tree.isBalanced()
+
+        tree.levelOrder(calledBack)
+        console.log('----------------')
+
+        tree.preOrder(calledBack)
+        console.log('----------------')   
+
+        tree.postOrder(calledBack)
+        console.log('----------------')
+
+        tree.inOrder(calledBack)
+        console.log('----------------')
+    }
+
+
+
+    driver()
 
 
 
